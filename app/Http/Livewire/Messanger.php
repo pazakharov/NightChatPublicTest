@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-
-class AddMessage extends Component
+use App\Models\Message;
+class Messanger extends Component
 {
     public $text;
 
@@ -16,15 +16,21 @@ class AddMessage extends Component
    
     public function add()
     {
-        Messsage::create([
+       if( Message::create([
         'user_id' => auth()->user()->id,
         'text' => $this->text
-        ]);
+        ])        
+        ){
+           $this->reset();     
+            
+           $this->emit('refreshing');
+        }
+
      
         
     }
     public function render()
     {
-        return view('livewire.add-message');
+        return view('livewire.messanger');
     }
 }

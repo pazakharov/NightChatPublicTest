@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Message extends Model
 {
     use HasFactory;
+    
     use SoftDeletes;
+
+    protected $with = ['User'];
 
     protected $fillable = ['user_id', 'text'];
 
